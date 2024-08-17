@@ -1,7 +1,9 @@
 import App from './App.tsx';
 import { createRoot } from 'react-dom/client';
 import { enableMocking } from './mocks/enableMocking.ts';
+import { Providers } from './Providers.tsx';
 import { StrictMode } from 'react';
+import { theme } from './theme/theme.ts';
 
 // The usage of a top level await here is essential for the mocking to work as it needs to happen before
 // the initialization of the react application.
@@ -14,7 +16,9 @@ try {
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 	createRoot(document.getElementById('root')!).render(
 		<StrictMode>
-			<App />
+			<Providers theme={ theme }>
+				<App />
+			</Providers>
 		</StrictMode>,
 	);
 }
