@@ -22,7 +22,6 @@ const productSlice = createSlice({
 		builder.addMatcher(
 			productsApiSlice.endpoints.getProductListing.matchFulfilled,
 			(state, action: PayloadAction<Product[]>) => {
-				console.log(action.type);
 				state.products = action.payload;
 			},
 		);

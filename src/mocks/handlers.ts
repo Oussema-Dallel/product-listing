@@ -1,56 +1,8 @@
-import { BASE_URL } from '../constants/app';
-import { MOCK_REQUEST_DEFAULT_DELAY } from './constants';
 import type { Product } from '../types/Product';
+import { BASE_URL, PRODUCT_LISTING_URL } from '../constants/app';
 import type { DefaultBodyType, HttpHandler, PathParams } from 'msw';
 import { delay, http, HttpResponse } from 'msw';
-
-// the initial data to be fetched by the client supposedly stored in a database
-const data = {
-	products: [
-		{
-			'id': 1,
-			'name': 'Product 1',
-			'category': 'Category A',
-			'price': 29.99,
-		},
-		{
-			'id': 2,
-			'name': 'Product 2',
-			'category': 'Category A',
-			'price': 49.99,
-		},
-		{
-			'id': 3,
-			'name': 'Product 3',
-			'category': 'Category B',
-			'price': 29.99,
-		},
-		{
-			'id': 4,
-			'name': 'Product 4',
-			'category': 'Category B',
-			'price': 49.99,
-		},
-		{
-			'id': 5,
-			'name': 'Product 5',
-			'category': 'Category A',
-			'price': 59.99,
-		},
-		{
-			'id': 6,
-			'name': 'Product 6',
-			'category': 'Category B',
-			'price': 69.99,
-		},
-		{
-			'id': 7,
-			'name': 'Product 7',
-			'category': 'Category A',
-			'price': 89.99,
-		},
-	] as Product[],
-};
+import { MOCK_REQUEST_DEFAULT_DELAY, mockedProducts } from './constants';
 
 const handlers: HttpHandler[] =
 	[
@@ -61,10 +13,10 @@ const handlers: HttpHandler[] =
 			return HttpResponse.json({ message: 'Hello Mocked World!' });
 		}),
 
-		http.get<PathParams, DefaultBodyType, Product[]>(`${BASE_URL}/product-listing`, async () => {
+		http.get<PathParams, DefaultBodyType, Product[]>(`${BASE_URL}/${PRODUCT_LISTING_URL}`, async () => {
 			await delay(MOCK_REQUEST_DEFAULT_DELAY);
 
-			return HttpResponse.json([ ...data.products ]);
+			return HttpResponse.json([ ...mockedProducts.products ]);
 		}),
 	];
 
