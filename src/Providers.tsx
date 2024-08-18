@@ -1,10 +1,13 @@
+import type { AppStore } from './store/store';
 import type { CustomTheme } from './theme/theme';
 import { globalStyle } from './theme/globalStyle';
+import { Provider } from 'react-redux';
 import { Suspense } from 'react';
 import type { FunctionComponent, PropsWithChildren, ReactElement } from 'react';
 import { GlobalStyles, ThemeProvider } from '@mui/material';
 
 interface AppProviderProps extends PropsWithChildren {
+    store: AppStore
     theme: CustomTheme;
 }
 
@@ -16,13 +19,16 @@ interface AppProviderProps extends PropsWithChildren {
 const Providers: FunctionComponent<AppProviderProps> = ({
 	theme,
 	children,
+	store,
 }): ReactElement => {
 	return (
 		<Suspense fallback={ null }>
 			<GlobalStyles styles={ globalStyle } />
-			<ThemeProvider theme={ theme }>
-				{ children }
-			</ThemeProvider>
+			<Provider store={ store }>
+				<ThemeProvider theme={ theme }>
+					{ children }
+				</ThemeProvider>
+			</Provider>
 		</Suspense>
 	);
 };

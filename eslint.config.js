@@ -478,6 +478,7 @@ export default tseslint.config(
           pascalCase: true
         }
       }],
+      'unicorn/numeric-separators-style': ["error"],
       'unicorn/no-null': ['off'],
       'unicorn/no-useless-undefined': ['off'],
       'unicorn/prevent-abbreviations': ['warn', {
