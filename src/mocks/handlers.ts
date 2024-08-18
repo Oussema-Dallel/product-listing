@@ -51,7 +51,8 @@ const data = {
 	] as Product[],
 };
 
-const baseUrl = import.meta.env.VITE_BASE_URL as string;
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+const baseUrl: string = import.meta.env.VITE_BASE_URL;
 
 const handlers: HttpHandler[] =
 	[
