@@ -1,5 +1,6 @@
 import { configureStore as configureReduxStore } from '@reduxjs/toolkit';
 import type { PreloadedStateShapeFromReducersMapObject } from '@reduxjs/toolkit';
+import { productsApiSlice } from './slices/productsApiSlice';
 import rootReducer from './rootReducer';
 import type { TypedUseSelectorHook } from 'react-redux';
 import { useDispatch, useSelector } from 'react-redux';
@@ -15,6 +16,7 @@ const configureStore = (
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type, @typescript-eslint/explicit-module-boundary-types
 ) => configureReduxStore({
 	reducer: rootReducer,
+	middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(productsApiSlice.middleware),
 	preloadedState,
 	devTools: import.meta.env.DEV,
 });

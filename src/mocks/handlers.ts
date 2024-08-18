@@ -1,3 +1,4 @@
+import { BASE_URL } from '../constants/app';
 import { MOCK_REQUEST_DEFAULT_DELAY } from './constants';
 import type { Product } from '../types/Product';
 import type { DefaultBodyType, HttpHandler, PathParams } from 'msw';
@@ -51,19 +52,16 @@ const data = {
 	] as Product[],
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-const baseUrl: string = import.meta.env.VITE_BASE_URL;
-
 const handlers: HttpHandler[] =
 	[
-		http.get<PathParams, DefaultBodyType, { message: string }>(`${baseUrl}/test`, async () => {
+		http.get<PathParams, DefaultBodyType, { message: string }>(`${BASE_URL}/test`, async () => {
 			// simulate loading
 			await delay(MOCK_REQUEST_DEFAULT_DELAY);
 
 			return HttpResponse.json({ message: 'Hello Mocked World!' });
 		}),
 
-		http.get<PathParams, DefaultBodyType, Product[]>(`${baseUrl}/product-listing`, async () => {
+		http.get<PathParams, DefaultBodyType, Product[]>(`${BASE_URL}/product-listing`, async () => {
 			await delay(MOCK_REQUEST_DEFAULT_DELAY);
 
 			return HttpResponse.json([ ...data.products ]);
