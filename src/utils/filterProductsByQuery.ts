@@ -1,4 +1,5 @@
 import type { FilterState } from '../store/slices/filterSlice';
+import { trimAndLowerText } from './trimAndLowerText';
 import type { Category, Product } from '../types/Product';
 
 /**
@@ -34,9 +35,10 @@ const filterProductsByQuery = (getters: {
 			return true;
 		}
 
-		const text = getText(product);
+		const text = trimAndLowerText(getText(product));
+		const textQuery = trimAndLowerText(searchQuery);
 
-		return text.includes(searchQuery);
+		return text.includes(textQuery);
 	}).filter(
 		product => !selectedCategory || getCategory(product) === selectedCategory,
 	);
