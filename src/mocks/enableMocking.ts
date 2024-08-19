@@ -9,7 +9,8 @@ const enableMocking = async (): Promise<ServiceWorkerRegistration | undefined> =
 	}
 	const { worker } = await import('./browser');
 
-	return await worker.start();
+	// eslint-disable-next-line @typescript-eslint/return-await
+	return worker.start();
 };
 
 export { enableMocking };
