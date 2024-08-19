@@ -31,7 +31,7 @@ type AppStore = ReturnType<typeof configureStore>;
 
 // App dispatch type and typed dispatch hook
 type AppDispatch = typeof store.dispatch;
-const useAppDispatch = useDispatch.withTypes<AppDispatch>;
+const useAppDispatch = useDispatch.withTypes<AppDispatch>();
 
 export type { AppState, AppDispatch, AppStore };
 
